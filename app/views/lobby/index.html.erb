@@ -12,7 +12,10 @@
 	<div class="col-sm-9 col-md-9">
 		<div id="messages-container" style="border: 1px solid lightgrey; padding: 10px; height: 400px; overflow-y: auto">
 			<% @messages.each do |message| %>
-				<p><%= message.text %></p>
+				<div class="message-block">
+					<p><b><%= message.sender %></b> - <small><%= message.time %></small></p>
+					<p><%= message.text %></p>
+				</div>
 			<% end %>
 		</div>
 

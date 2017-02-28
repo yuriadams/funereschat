@@ -2,8 +2,8 @@ App = App || {};
 App.lobby = (function($) {
 	function _appendMessage(data) {
 		var html = [];
-		html.push("<div>");
-		html.push("<p>" + data.user_id + " - " + data.created_at + "</p>");
+		html.push("<div class='message-block'>");
+		html.push("<p><b>" + data.sender + "</b> - <small>" + data.time + "</small></p>");
 		html.push("<p>" + data.text + "</p>");
 		html.push("</div>");
 		$('#messages-container').append(html.join(''));

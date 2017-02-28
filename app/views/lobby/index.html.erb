@@ -1,0 +1,23 @@
+<% @rooms.each do |room| %>
+	<p><%= link_to room.name, lobby_index_path(room_id: room.id) %></p>
+<% end %>
+
+<hr>
+
+<div id="container" style="background: red; padding: 10px;">
+	<% @messages.each do |message| %>
+		<p><%= message.text %></p>
+	<% end %>
+</div>
+
+<%= form_for :message, html: { id: 'form-message' } do |f| %>
+	<%= f.text_area :text %><br />
+	<%= f.button 'Submit' %>
+<% end %>
+
+<%= content_for :js do %>
+<script type="text/javascript">
+	var USER_ID = 1;
+	App.lobby.subscribe(<%= params[:room_id] %>, USER_ID);
+</script>
+<% end %>

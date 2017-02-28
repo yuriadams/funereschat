@@ -1,19 +1,30 @@
-<% @rooms.each do |room| %>
-	<p><%= link_to room.name, lobby_index_path(room_id: room.id) %></p>
-<% end %>
+<div class="row">
+	<div class="col-sm-3 col-md-3">
+		<ul class="list-group">
+			<% @rooms.each do |room| %>
+				<li class="list-group-item">
+			  	<%= link_to "# #{room.name}", lobby_index_path(room_id: room.id) %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
 
-<hr>
+	<div class="col-sm-9 col-md-9">
+		<div id="messages-container" style="border: 1px solid lightgrey; padding: 10px; height: 400px; overflow-y: auto">
+			<% @messages.each do |message| %>
+				<p><%= message.text %></p>
+			<% end %>
+		</div>
 
-<div id="container" style="background: red; padding: 10px;">
-	<% @messages.each do |message| %>
-		<p><%= message.text %></p>
-	<% end %>
+		<hr>
+
+		<%= form_for :message, html: { id: 'form-message' } do |f| %>
+			<div class="form-group">
+				<%= f.text_area :text, class: 'message-box form-control' %>
+			</div>
+		<% end %>
+	</div>
 </div>
-
-<%= form_for :message, html: { id: 'form-message' } do |f| %>
-	<%= f.text_area :text %><br />
-	<%= f.button 'Submit' %>
-<% end %>
 
 <%= content_for :js do %>
 <script type="text/javascript">

@@ -4,10 +4,6 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-  	message = Message.create(room_id: params[:room],
-  													 user_id: params[:user],
-  													 text: data['text']).decorate
-
-  	ActionCable.server.broadcast("chat_#{params[:room]}", message.to_json)
+  	MessageChatJob.perform_async(params[:room], params[:user], data['text'], 1)
   end
 end

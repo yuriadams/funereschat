@@ -1,0 +1,17 @@
+<div class="col-md-4 col-md-offset-4">
+	<h3 class="text-center">FuneresChat</h3>
+
+	<hr>
+
+	<%= form_for :sessions, url: sessions_path do |f| %>
+		<div class="form-group">
+			<%= f.text_field :email, class: "form-control", placeholder: 'Your email' %>
+		</div>
+
+		<div class="form-group">
+			<%= f.collection_select :dialect_slug, Dialect.all, :slug, :name, { include_blank: 'Select Dialect' }, class: 'form-control' %>
+		</div>
+
+		<%= f.submit 'Join', class: 'btn btn-primary btn-sm pull-right' %>
+	<% end %>
+</div>

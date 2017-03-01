@@ -3,3 +3,10 @@
   margin-bottom: 5px;
   padding: 10px 10px;
 }
+
+#messages-container {
+	border: 1px solid lightgrey;
+	padding: 10px;
+	height: 400px;
+	overflow-y: auto;
+}

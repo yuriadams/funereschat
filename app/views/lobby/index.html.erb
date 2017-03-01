@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="col-sm-3 col-md-3">
+		<h4>Channels</h4>
 		<ul class="list-group">
 			<% @rooms.each do |room| %>
 				<li class="list-group-item">
@@ -10,7 +11,7 @@
 	</div>
 
 	<div class="col-sm-9 col-md-9">
-		<div id="messages-container" style="border: 1px solid lightgrey; padding: 10px; height: 400px; overflow-y: auto">
+		<div id="messages-container">
 			<% @messages.each do |message| %>
 				<div class="message-block">
 					<p><b><%= message.sender %></b> - <small><%= message.time %></small></p>
@@ -23,7 +24,11 @@
 
 		<%= form_for :message, html: { id: 'form-message' } do |f| %>
 			<div class="form-group">
-				<%= f.text_area :text, class: 'message-box form-control' %>
+				<% if params[:room_id].nil? %>
+					<%= f.text_area :text, class: 'message-box form-control', disabled: true, placeholder: 'Please select a channel' %>
+				<% else %>
+					<%= f.text_area :text, class: 'message-box form-control', placeholder: 'Your message here' %>
+				<% end %>
 			</div>
 		<% end %>
 	</div>
@@ -31,7 +36,9 @@
 
 <%= content_for :js do %>
 <script type="text/javascript">
-	var USER_ID = 1;
-	App.lobby.subscribe(<%= params[:room_id] %>, USER_ID);
+	<% if params[:room_id] %>
+		var USER_ID = <%= current_user.id %>;
+		App.lobby.subscribe(<%= params[:room_id] %>, USER_ID);
+	<% end %>
 </script>
 <% end %>

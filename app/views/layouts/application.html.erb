@@ -10,6 +10,21 @@
 
   <body>
     <div class="container-fluid">
+      <% if user_signed_in? %>
+        <p>Hi <%= current_user.email %> - <%= link_to 'logout', session_path(current_user), method: :delete %></p>
+        <hr>
+      <% end %>
+
+      <% if flash[:error] %>
+        <div class="alert alert-danger" role="alert">
+          <% flash[:error].each do |msg| %>
+            <%= msg %><br />
+          <% end %>
+        </div>
+      <% elsif flash[:notice] %>
+        <div class="alert alert-success" role="alert"><%= flash[:notice] %></div>
+      <% end %>
+
       <%= yield %>
     </div>
 

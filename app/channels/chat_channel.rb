@@ -4,6 +4,6 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-  	MessageChatJob.perform_async(params[:room], params[:user], data['text'], 1)
+  	MessageChatJob.perform_later(params[:room], params[:user], data['text'], "yoda")
   end
 end

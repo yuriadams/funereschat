@@ -2,7 +2,7 @@ require 'net/http'
 
 class TranslatorService
   def self.translate(text, dialect)
-    TranslationParser.parse(JSON.parse(make_request(text, dialect)))
+    TranslationParser.parse(JSON.parse(make_request(text, dialect))).text
   end
 
   def self.make_request text, dialect

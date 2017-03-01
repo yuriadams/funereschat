@@ -1,6 +1,10 @@
 class Translation
   def initialize success, contents
-    @sucess = sucess
+    @success = success
     @contents = contents
+  end
+
+  def text
+    @contents.translated
   end
 end

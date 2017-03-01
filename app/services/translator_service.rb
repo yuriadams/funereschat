@@ -2,8 +2,11 @@ require 'net/http'
 
 class TranslatorService
   def self.translate(text, dialect)
+    TranslationParser.parse(JSON.parse(make_request(text, dialect)))
+  end
+
+  def self.make_request text, dialect
     uri = URI("http://api.funtranslations.com/translate/#{dialect}.json")
-    res = Net::HTTP.post_form(uri, text: text)
-    JSON.parse(res.body)["contents"]["translated"]
+    Net::HTTP.post_form(uri, text: text).body
   end
 end

@@ -7,7 +7,7 @@ class MessageChatJob < ApplicationJob
     message = Message.create(room_id: room,
   													 user_id: user_id,
   													 text: translated_text)
-
+                                                      
   	ActionCable.server.broadcast("chat_#{room}", message.decorate.to_json)
   end
 end

@@ -13,9 +13,9 @@ describe LobbyController do
     session[:user_id] = user.id
   end
 
-  subject{ get :index, params: { room_id: room.id } }
-
   describe "GET index" do
+    subject{ get :index, params: { room_id: room.id } }
+    
     it " renders index page" do
       subject
       expect(response).to render_template(:index)

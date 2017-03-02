@@ -1,4 +1,6 @@
 class MessageDecorator
+  include ActionView::Helpers
+
   def initialize(message)
     @message = message
   end
@@ -11,6 +13,10 @@ class MessageDecorator
     message.user.email
   end
 
+  def dialect
+    message.dialect
+  end
+
   def time
     message.created_at.strftime('%d/%m/%Y %H:%M')
   end
@@ -19,7 +25,8 @@ class MessageDecorator
     {
       text: self.text,
       sender: self.sender,
-      time: self.time
+      time: self.time,
+      dialect: self.dialect
     }
   end
 

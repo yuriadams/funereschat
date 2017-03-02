@@ -5,8 +5,12 @@
 }
 
 #messages-container {
-	border: 1px solid lightgrey;
-	padding: 10px;
-	height: 400px;
-	overflow-y: auto;
+  border: 1px solid lightgrey;
+  padding: 10px;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.msg-icon {
+  width: 32px;
 }

@@ -1,24 +1,34 @@
-# README
+# Funeres Chat
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple chat using Rails 5(ActionCable + ActiveJob)
 
-Things you may want to cover:
+## Dependencies
 
-* Ruby version
+* Postgres
+* Redis
 
-* System dependencies
+## Setup
 
-* Configuration
+```shell
+$ gem install bundler
+$ cd $PROJECT_PATH
+$ bundle install
+$ rake db:create
+$ rake db:migrate
+$ rake db:seed
+```
 
-* Database creation
+## Running
+```shell
+$ redis-server
+$ bundle exec sidekiq --logfile log/sidekiq.log
+$ rails server
+```
 
-* Database initialization
+## Tests
 
-* How to run the test suite
+The app uses **RSpec** to run the automated tests. Run the following command:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```shell
+$ cd $PROJECT_PATH && rspec
+```

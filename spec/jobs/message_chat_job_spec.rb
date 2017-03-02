@@ -1,17 +1,18 @@
 require 'rails_helper'
 
 describe MessageChatJob do
+  let(:dialect){ Dialect.create(slug: 'yoda', name: 'Yoda') }
   let(:room){ Room.create(name: "General") }
-  let(:user){ User.create(email: "yuriadams@gmail.com") }
+  let(:user){ User.create(email: "yuriadams@gmail.com", dialect: dialect) }
   let(:text){ 'GENERAL TEXT' }
-  let(:dialect){ 'yoda' }
+  let(:dialect_slug){ dialect.slug }
 
   it 'matches with enqueued job' do
     ActiveJob::Base.queue_adapter = :test
 
     expect {
-      described_class.perform_later(room.id, user.id, text, dialect)
-    }.to have_enqueued_job.with(room.id, user.id, text, dialect)
+      described_class.perform_later(room.id, user.id, text, dialect_slug)
+    }.to have_enqueued_job.with(room.id, user.id, text, dialect_slug)
   end
 
   context "Internal Behaviour" do
@@ -35,7 +36,7 @@ describe MessageChatJob do
 
     it " broadcasts the message to room" do
       expect(action_server).to receive(:broadcast).with("chat_#{room.id}", message_hash.to_json)
-      described_class.new.perform(room.id, user.id, text, dialect)
+      described_class.new.perform(room.id, user.id, text)
     end
   end
 end

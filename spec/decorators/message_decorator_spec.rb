@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 describe MessageDecorator do
+  let(:dialect){ Dialect.create(name: "Yoda", slug: "yoda") }
   let(:room){ Room.create(name: "General") }
   let(:user){ User.create(email: "yuriadams@gmail.com") }
   let(:text){ "Message xxxxxx" }
-  let(:message){ Message.create(text: text, user: user, room: room, created_at: DateTime.new(2017,3,2,0,4,0)) }
+  let(:message){ Message.create(text: text,
+                                user: user,
+                                room: room,
+                                dialect: dialect.slug,
+                                created_at: DateTime.new(2017,3,2,0,4,0)) }
 
   subject{ described_class.new(message) }
 
@@ -30,7 +35,8 @@ describe MessageDecorator do
     it "returns hash version from the decorator" do
       expect(subject.to_json).to eq({text: "Message xxxxxx",
                                      sender: "yuriadams@gmail.com",
-                                     time: "02/03/2017 00:04"})
+                                     time: "02/03/2017 00:04",
+                                     dialect: "yoda"})
     end
   end
 end

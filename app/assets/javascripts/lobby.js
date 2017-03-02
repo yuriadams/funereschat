@@ -14,6 +14,12 @@ App.lobby = (function($) {
         { channel: 'ChatChannel', room_id: roomId, user_id: userId },
         { received: _appendMessage });
 
+    var activeConnectionsChannel = App.cable.subscriptions.create(
+        { channel: 'ActiveConnectionsChannel' },
+        { received: function(data){
+
+        }});
+
     $('.message-box').on('keyup', function(evt) {
       if (evt.keyCode === 13) {
           var $this = $(this);
@@ -24,6 +30,6 @@ App.lobby = (function($) {
   }
 
   return {
-      subscribe: _subscribe
+    subscribe: _subscribe
   };
 }($));

@@ -10,6 +10,6 @@ class MessageChatJob < ApplicationJob
                              dialect: user.dialect.slug,
                              text: translated_text)
 
-      ActionCable.server.broadcast("chat_#{room_id}", message.decorate.to_json)
+    ActionCable.server.broadcast("chat_#{room_id}", message.decorate.to_json)
   end
 end

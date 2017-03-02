@@ -17,7 +17,18 @@ App.lobby = (function($) {
     var activeConnectionsChannel = App.cable.subscriptions.create(
         { channel: 'ActiveConnectionsChannel' },
         { received: function(data){
+          var html = [];
+          data.forEach(function(id_email) {
+            var id = id_email[0];
+            var email = id_email[1];
 
+            if (id === userId) { return; }
+
+            html.push("<li>");
+            html.push(email);
+            html.push("</li>");
+          });
+          $('.active-users').html(html.join(''));
         }});
 
     $('.message-box').on('keyup', function(evt) {
@@ -32,4 +43,5 @@ App.lobby = (function($) {
   return {
     subscribe: _subscribe
   };
+
 }($));

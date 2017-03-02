@@ -32,3 +32,7 @@ The app uses **RSpec** to run the automated tests. Run the following command:
 ```shell
 $ cd $PROJECT_PATH && rspec
 ```
+
+## Sample Live
+
+https://funereschat.herokuapp.com

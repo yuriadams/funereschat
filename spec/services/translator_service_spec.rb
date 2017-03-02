@@ -25,7 +25,7 @@ describe TranslatorService do
         end
       end
 
-      it " returns the translated text" do
+      it ' returns the translated text' do
         expect(subject).to eq(translated)
       end
     end
@@ -36,14 +36,14 @@ describe TranslatorService do
           {
             error: {
               code: 429,
-              message: "Too Many Requests: Rate limit of 5 requests per hour exceeded. Please wait for 56 minutes and 54 seconds."
+              message: 'Too Many Requests: Rate limit of 5 requests per hour exceeded. Please wait for 56 minutes and 54 seconds.'
             }
           }.to_json
         end
       end
 
-      it " returns the error mensagem text" do
-        expect(subject).to eq("")
+      it ' returns the error mensagem text' do
+        expect(subject).to eq('API ERROR')
       end
     end
   end
